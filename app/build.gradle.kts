@@ -50,6 +50,8 @@ android {
 }
 
 dependencies {
+    //splash
+    implementation("androidx.core:core-splashscreen:1.0.1")
     //supabase
     implementation("io.github.jan-tennert.supabase:postgrest-kt:3.0.3")
     implementation("io.github.jan-tennert.supabase:storage-kt:3.0.3")
