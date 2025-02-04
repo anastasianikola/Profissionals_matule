@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
+    id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
 }
 
 android {
@@ -49,6 +50,14 @@ android {
 }
 
 dependencies {
+    //supabase
+    implementation("io.github.jan-tennert.supabase:postgrest-kt:3.0.3")
+    implementation("io.github.jan-tennert.supabase:storage-kt:3.0.3")
+    implementation("io.github.jan-tennert.supabase:auth-kt:3.0.3")
+    implementation("io.ktor:ktor-client-android:3.0.3")
+    implementation("io.ktor:ktor-client-core:3.0.3")
+    implementation("io.ktor:ktor-utils:3.0.3")
+    //hilt
     implementation("androidx.navigation:navigation-compose:2.6.0")
     implementation("com.google.dagger:hilt-android:2.55")
     kapt("com.google.dagger:hilt-compiler:2.55")
