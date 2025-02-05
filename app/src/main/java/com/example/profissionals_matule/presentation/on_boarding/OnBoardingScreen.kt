@@ -12,25 +12,37 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.TileMode
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.profissionals_matule.ui.theme.Accent
+import com.example.profissionals_matule.ui.theme.Disable
 import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun OnBoardingScreen(onFinished: () -> Unit) {
+fun OnBoardingScreen(onComplete: () -> Unit) {
     val pages = listOf(OnBoardingModel.FirstPage, OnBoardingModel.SecondPage, OnBoardingModel.ThirdPage)
     val pagerState = rememberPagerState(initialPage = 0) { pages.size }
     val coroutineScope = rememberCoroutineScope()
     var buttonText by remember { mutableStateOf("Начать") }
-
+    val context = LocalContext.current
+    val colorList = listOf(Accent, Disable)
+    val brush = Brush.verticalGradient(
+        colors = colorList,
+        startY = 0f,
+        endY = Float.POSITIVE_INFINITY
+    )
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(0xFF1E1E1E)), // Фон всего экрана
-        contentAlignment = Alignment.BottomCenter
+            .background(brush),
+        contentAlignment = Alignment.BottomCenter,
+
     ) {
         Column(
             modifier = Modifier.fillMaxSize(),
@@ -55,14 +67,16 @@ fun OnBoardingScreen(onFinished: () -> Unit) {
             // Индикаторы (точки переключения)
             Indicators(pageSize = pages.size, currentPage = pagerState.currentPage)
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(150.dp))
 
             // Кнопка "Начать" / "Далее"
             ButtonUI(
                 text = buttonText,
                 onClick = {
                     if (pagerState.currentPage == pages.size - 1) {
-                        onFinished()
+                        coroutineScope.launch {
+                            onComplete()
+                        }
                     } else {
                         coroutineScope.launch {
                             pagerState.animateScrollToPage(pagerState.currentPage + 1)

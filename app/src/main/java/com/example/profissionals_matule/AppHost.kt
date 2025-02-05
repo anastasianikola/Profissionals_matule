@@ -4,20 +4,42 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.profissionals_matule.presentation.sing_in.SignIn
 import com.example.profissionals_matule.presentation.home.Home
+import com.example.profissionals_matule.presentation.on_boarding.AppPreferences
+import com.example.profissionals_matule.presentation.on_boarding.OnBoardingScreen
+import com.example.profissionals_matule.presentation.sing_in.SignIn
 
 @Composable
-fun AppNavHost() {
+fun AppNavigation(appPreferences: AppPreferences) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = "sign_in") {
-        composable("sign_in") {
-            SignIn(navController = navController)
+
+    NavHost(navController = navController, startDestination = getStartDestination(appPreferences)) {
+        composable("onboarding") {
+            OnBoardingScreen {
+                appPreferences.isOnboardingShown = true
+                navController.navigate("signin") {
+                    popUpTo("onboarding") { inclusive = true }
+                }
+            }
+        }
+        composable("signin") {
+            SignIn {
+                appPreferences.isUserLogin = true
+                navController.navigate("home") {
+                    popUpTo("signin") { inclusive = true }
+                }
+            }
         }
         composable("home") {
             Home()
         }
-        composable("onboarding"){
-        }
+    }
+}
+
+private fun getStartDestination(appPreferences: AppPreferences): String {
+    return when {
+        !appPreferences.isOnboardingShown -> "onboarding"
+        appPreferences.isUserLogin -> "home"
+        else -> "signin"
     }
 }

@@ -61,7 +61,7 @@ import kotlin.coroutines.coroutineContext
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
-fun SignIn(viewModel: SignInViewModel = hiltViewModel(), navController: NavController) {
+fun SignIn(viewModel: SignInViewModel = hiltViewModel(), onSignIn: () -> Unit) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -193,7 +193,7 @@ fun SignIn(viewModel: SignInViewModel = hiltViewModel(), navController: NavContr
                 }
                 LaunchedEffect(isSignedIn) {
                     if (isSignedIn) {
-                        navController.navigate("home")
+                        onSignIn()
                     }
                 }
                 Button(
@@ -242,7 +242,7 @@ fun SignIn(viewModel: SignInViewModel = hiltViewModel(), navController: NavContr
                 color = com.example.profissionals_matule.ui.theme.Text,
                 fontSize = 16.sp,
                 modifier = Modifier.clickable {
-                    navController.navigate("signUp")
+                    onSignIn()
                 }
             )
         }

@@ -23,7 +23,7 @@ sealed class OnBoardingModel(
         image_bottom = 0,
         image_top = R.drawable.image_2,
         title_first = "",
-        title_second = "Начнем путешествие",
+        title_second = "Начнем\nпутешествие",
         description = "Умная, великолепная и модная\nколлекция Изучите сейчас"
     )
     data object  ThirdPage: OnBoardingModel(
@@ -31,6 +31,6 @@ sealed class OnBoardingModel(
         image_top = R.drawable.image_3,
         title_first = "",
         title_second = "У Вас Есть Сила,\nЧтобы",
-        description = "В вашей комнате много красивых и привлекательных растений"
+        description = "В вашей комнате много красивых и\nпривлекательных растений"
     )
 }

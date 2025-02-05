@@ -2,6 +2,7 @@ package com.example.profissionals_matule.presentation.on_boarding
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.material3.Button
@@ -30,7 +31,7 @@ fun ButtonUI(
         ),
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .fillMaxWidth()
+            .size(335.dp, 50.dp)
             .padding(start = 10.dp, end = 10.dp)
         ) {
 
