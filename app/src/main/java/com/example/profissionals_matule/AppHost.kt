@@ -1,12 +1,16 @@
 package com.example.profissionals_matule
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.internal.composableLambda
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.profissionals_matule.presentation.catalog.Catalog
+import com.example.profissionals_matule.presentation.favourite.Favourite
 import com.example.profissionals_matule.presentation.home.Home
 import com.example.profissionals_matule.presentation.on_boarding.AppPreferences
 import com.example.profissionals_matule.presentation.on_boarding.OnBoardingScreen
+import com.example.profissionals_matule.presentation.popular.Popular
 import com.example.profissionals_matule.presentation.sing_in.SignIn
 
 @Composable
@@ -31,7 +35,34 @@ fun AppNavigation(appPreferences: AppPreferences) {
             }
         }
         composable("home") {
-            Home()
+            Home(
+                onPopularClick = {
+                    navController.navigate("popular")
+                },
+                onCatalogClick = {
+                    navController.navigate("catalog")
+                }
+            )
+        }
+        composable("popular"){
+            Popular(
+                onHomeClick = {
+                    navController.navigate("home")
+                },
+                onFavouriteClick = {
+                    navController.navigate("popular")
+                }
+            )
+        }
+        composable("favoutite"){
+            Favourite()
+        }
+        composable("catalog"){
+            Catalog(
+                onHomeClick = {
+                    navController.navigate("home")
+                }
+            )
         }
     }
 }

@@ -31,8 +31,7 @@ fun SearchBar() {
             value = query,
             onValueChange = { query = it },
             modifier = Modifier
-                .width(269.dp) // Сделали уже
-                .height(52.dp)
+                .fillMaxWidth(0.85f)
                 .shadow(2.dp, shape = RoundedCornerShape(14.dp)) // Добавили тень
                 .clip(RoundedCornerShape(14.dp))
                 .background(Color.White) // Фон белый для видимости тени
